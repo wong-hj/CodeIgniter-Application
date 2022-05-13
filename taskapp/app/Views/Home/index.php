@@ -1,4 +1,12 @@
+<?= $this->extend("layouts/default")?>
+
+<?= $this->section("title")?>
 
     Home
-</body>
-</html>
+
+<?= $this ->endSection() ?>
+
+<?= $this->section("content")?>
+    <h1>Home</h1>
+
+<?= $this ->endSection() ?>
