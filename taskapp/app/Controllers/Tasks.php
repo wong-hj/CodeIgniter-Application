@@ -6,7 +6,11 @@ class Tasks extends BaseController
 {
     public function index()
     {
-        
-        return view("Tasks/index.php");
+        $data = [
+            ["id" => 1, "description" => "First Task"],
+            ["id" => 2, "description" => "Second Task"]
+        ]; 
+
+        return view("Tasks/index.php", ["tasks" => $data]);
     }
 }
