@@ -21,6 +21,8 @@
         <dd><?= esc($task->description) ?></dd>
     </dl>
     <a href="<?= site_url('/tasks/edit/' . $task->id)?>"> Edit </a>
+    <a href="<?= site_url('/tasks/delete/' . $task->id)?>"> Delete </a>
+
 <?= $this ->endSection() ?>
 
 <!-- end of section for content -->

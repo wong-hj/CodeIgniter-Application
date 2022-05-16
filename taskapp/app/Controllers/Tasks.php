@@ -28,7 +28,7 @@ class Tasks extends BaseController
     public function show($id) 
     {
         
-        $task = $this->model->find($id);
+        $task = $this->getTaskOr404($id);
 
         return view("Tasks/show.php", [
             'task' => $task
@@ -69,7 +69,7 @@ class Tasks extends BaseController
     public function edit($id)
     {
         
-        $task = $this->model->find($id);
+        $task = $this->getTaskOr404($id);
 
         return view("Tasks/edit.php", [
             'task' => $task
@@ -79,7 +79,7 @@ class Tasks extends BaseController
     public function update($id)
     {
         
-        $task = $this->model->find($id);
+        $task = $this->getTaskOr404($id);
 
         $task->fill($this->request->getPost());
         
@@ -101,5 +101,32 @@ class Tasks extends BaseController
                              ->withInput();
         }
         
+    }
+
+    public function delete($id)
+    {
+        $task = $this->getTaskOr404($id);
+
+        if($this->request->getMethod() === 'post') {
+            $this->model->delete($id);
+
+            return redirect()->to("/tasks")
+                             ->with('delete', 'Task Deleted Successfully');
+        }
+
+        return view('Tasks/delete', [
+            'task' => $task
+        ]);
+    }
+
+    private function getTaskOr404($id)
+    {
+        $task = $this->model->find($id);
+
+        if ($task === null) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Task with id $id not found");
+        }
+
+        return $task;
     }
 }
