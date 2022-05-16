@@ -6,3 +6,5 @@ class TaskModel extends \CodeIgniter\Model
 {
     protected $table = 'task';
 }
+
+?>

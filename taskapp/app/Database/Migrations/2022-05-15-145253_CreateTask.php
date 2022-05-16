@@ -10,7 +10,7 @@ class CreateTask extends Migration
     {
         //add tables and fields when command run in CMD
         //command: php spark migrate
-        $this ->forge->addField([
+        $this->forge->addField([
             'id' => [
                 'type'           => 'INT',
                 'constraint'     => 5,
@@ -19,11 +19,11 @@ class CreateTask extends Migration
             ],
             'description' => [
                 'type'           => 'VARCHAR',
-                'constraint'     => 128,
+                'constraint'     => 128
             ]
         ]);
 
-        $this ->forge->addPrimaryKey('id');
+        $this->forge->addPrimaryKey('id');
         $this->forge->createTable('task');
     }
 
