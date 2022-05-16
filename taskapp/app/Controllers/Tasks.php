@@ -44,12 +44,15 @@ class Tasks extends BaseController
 
         if($result === false) {
 
-            dd($model->errors());
+            // dd($model->errors());
+            return redirect()->back()
+                             ->with('errors', $model->errors())
+                             ->with('warning', 'Invalid Data');
 
         } else {
 
-            dd($result);
-            
+            return redirect()->to("/tasks/show/$result")
+                             ->with('info', 'Task Created Successfully');
         }
         
     }

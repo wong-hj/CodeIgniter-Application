@@ -14,6 +14,14 @@
     <h1>Adding New Task</h1>
     <a href="<?= site_url('/tasks') ?>">&laquo; Back to Index </a>
     
+    <?php if (session()->has('errors')): ?>
+        <ul>
+            <?php foreach(session('errors') as $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif ?>
+    
     <!-- Open Form Here with Form Helper in CodeIgniter -->
     <?= form_open("/tasks/create") ?>
 
@@ -25,7 +33,7 @@
         <button>Save</button>
     </form>
     <!-- Manually closing form -->
-    
+
 <?= $this ->endSection() ?>
 
 <!-- end of section for content -->
