@@ -12,7 +12,7 @@
 <?= $this->section("content")?>
 
     <h1>Welcome to Tasks</h1>
-
+    <a href="<?= site_url('/tasks') ?>">&laquo; Back to Index </a>
     <dl>
         <dt>ID</dt>
         <dd><?= $task['id'] ?></dd>

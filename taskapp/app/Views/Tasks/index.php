@@ -12,13 +12,14 @@
 <?= $this->section("content")?>
 
     <h1>Welcome to Tasks</h1>
-
+    <a href="<?= site_url("")?>">&laquo; Back to Home Page</a>
     <ul>
         <?php foreach($tasks as $task): ?>
 
             <li>
-                <?= $task['id'] ?>
-                <?= $task['description'] ?>
+                <a href="<?= site_url("/tasks/show/" . $task['id'])  ?>">
+                    <?= $task['description'] ?>
+                </a>
             </li>
         <?php endforeach; ?>
     </ul>
