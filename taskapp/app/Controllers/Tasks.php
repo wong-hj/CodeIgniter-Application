@@ -18,4 +18,14 @@ class Tasks extends BaseController
         
         return view("Tasks/index.php", ["tasks" => $data]);
     }
+
+    public function show($id) 
+    {
+        $model = new \App\Models\TaskModel;
+        $task = $model->find($id);
+
+        return view("Tasks/show.php", [
+            'task' => $task
+        ]);
+    }
 }
