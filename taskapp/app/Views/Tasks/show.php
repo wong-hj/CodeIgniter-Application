@@ -20,7 +20,7 @@
         <dt>Description</dt>
         <dd><?= esc($task['description']) ?></dd>
     </dl>
-
+    <a href="<?= site_url('/tasks/edit/' . $task['id'])?>"> Edit </a>
 <?= $this ->endSection() ?>
 
 <!-- end of section for content -->
