@@ -11,14 +11,14 @@
 <!-- section for content -->
 <?= $this->section("content")?>
 
-    <h1>Welcome to Tasks</h1>
+    <h1>Task <?= $task['id'] ?></h1>
     <a href="<?= site_url('/tasks') ?>">&laquo; Back to Index </a>
     <dl>
         <dt>ID</dt>
         <dd><?= $task['id'] ?></dd>
 
         <dt>Description</dt>
-        <dd><?= $task['description'] ?></dd>
+        <dd><?= esc($task['description']) ?></dd>
     </dl>
 
 <?= $this ->endSection() ?>
