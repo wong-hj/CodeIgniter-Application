@@ -21,14 +21,11 @@
             <?php endforeach; ?>
         </ul>
     <?php endif ?>
-    
+
     <!-- Open Form Here with Form Helper in CodeIgniter -->
     <?= form_open("/tasks/create") ?>
 
-        <div>
-            <label for="description"> Description </label>
-            <input type="text" id="description" name="description" value="">
-        </div>
+        <?= $this->include('/Tasks/form.php') ?>
 
         <button>Save</button>
     </form>

@@ -2,8 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Entities\Task;
+
 class Tasks extends BaseController
 {
+    private $models;
+
+    public function __construct() {
+        $this->model = new \App\Models\TaskModel;
+    }
     public function index()
     {
         // $data = [
@@ -11,8 +18,7 @@ class Tasks extends BaseController
         //     ["id" => 2, "description" => "Second Task"]
         // ]; 
 
-        $model = new \App\Models\TaskModel;
-        $data = $model->findAll();
+        $data = $this->model->findAll();
         
         // dd($data);
         
@@ -21,8 +27,8 @@ class Tasks extends BaseController
 
     public function show($id) 
     {
-        $model = new \App\Models\TaskModel;
-        $task = $model->find($id);
+        
+        $task = $this->model->find($id);
 
         return view("Tasks/show.php", [
             'task' => $task
@@ -31,37 +37,39 @@ class Tasks extends BaseController
 
     public function new()
     {
-        return view("Tasks/new.php");
+
+        $task = new Task;
+
+        return view("Tasks/new.php", [
+            'task' => $task
+        ]);
     }
 
     public function create()
     {
-        $model = new \App\Models\TaskModel;
+        
+        $task = new Task($this->request->getPost());
 
-        $result = $model -> insert([
-            'description' => $this->request->getPost("description")
-        ]);
+        if($this->model -> insert($task)) {
 
-        if($result === false) {
-
-            // dd($model->errors());
-            return redirect()->back()
-                             ->with('errors', $model->errors())
-                             ->with('warning', 'Invalid Data')
-                             ->withInput();
+            return redirect()->to("/tasks/show/{$this->model->insertID}")
+                             ->with('info', 'Task Created Successfully');
 
         } else {
 
-            return redirect()->to("/tasks/show/$result")
-                             ->with('info', 'Task Created Successfully');
+            // dd($model->errors());
+            return redirect()->back()
+                             ->with('errors', $this->model->errors())
+                             ->with('warning', 'Invalid Data')
+                             ->withInput();
         }
         
     }
 
     public function edit($id)
     {
-        $model = new \App\Models\TaskModel;
-        $task = $model->find($id);
+        
+        $task = $this->model->find($id);
 
         return view("Tasks/edit.php", [
             'task' => $task
@@ -70,18 +78,25 @@ class Tasks extends BaseController
 
     public function update($id)
     {
-        $model = new \App\Models\TaskModel;
+        
+        $task = $this->model->find($id);
 
-        $result = $model -> update($id, [
-            'description' => $this->request->getPost("description")
-        ]);
+        $task->fill($this->request->getPost());
+        
+        if (! $task->hasChanged()) {
 
-        if ($result) {
+            return redirect()->back()
+                             ->with('warning', 'Nothing to Update')
+                             ->withInput();
+
+        }
+        if ($this->$model->save($task)) {
+
             return redirect()->to("/tasks/show/$id")
                              ->with('info', 'Task Updated Successfully');
         } else {
             return redirect()->back()
-                             ->with('errors', $model->errors())
+                             ->with('errors', $this->model->errors())
                              ->with('warning', 'Invalid Data')
                              ->withInput();
         }

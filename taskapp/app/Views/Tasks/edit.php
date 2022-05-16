@@ -11,7 +11,7 @@
 <!-- section for content -->
 <?= $this->section("content")?>
 
-    <h1>Editing Task</h1>
+    <h1>Editing Task <?=$task->id?></h1>
     <a href="<?= site_url('/tasks') ?>">&laquo; Back to Index </a>
     
     <?php if (session()->has('errors')): ?>
@@ -23,15 +23,12 @@
     <?php endif ?>
     
     <!-- Open Form Here with Form Helper in CodeIgniter -->
-    <?= form_open("/tasks/update/" . $task['id']) ?>
+    <?= form_open("/tasks/update/" . $task->id) ?>
 
-        <div>
-            <label for="description"> Description </label>
-            <input type="text" id="description" name="description" value="<?= old('description', esc($task['description'])) ?>">
-        </div>
+        <?= $this->include('/Tasks/form.php') ?>
 
         <button>Save</button>
-        <a href="<?= site_url("/tasks/show/" . $task['id'])?>"> Cancel</a>
+        <a href="<?= site_url("/tasks/show/" . $task->id)?>"> Cancel</a>
     </form>
     <!-- Manually closing form -->
 
