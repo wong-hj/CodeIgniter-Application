@@ -17,7 +17,8 @@ class Tasks extends BaseController
         //     ["id" => 1, "description" => "First Task"],
         //     ["id" => 2, "description" => "Second Task"]
         // ]; 
-
+        
+        
         $data = $this->model->findAll();
         
         // dd($data);
