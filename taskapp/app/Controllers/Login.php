@@ -18,7 +18,11 @@ class Login extends BaseController
 
         if($auth->login($email, $password)) {
 
-            return redirect()->to("/")
+            $redirect_url = session('redirect_url') ?? '/'; //if there is no requested url then it will return null (??) which will go to homepage (/).
+
+            unset($_SESSION['redirect_url']);
+
+            return redirect()->to($redirect_url)
                                  ->with('info', 'User Successfully Login.');
 
         } else {
@@ -33,7 +37,7 @@ class Login extends BaseController
     {
         
         service('auth')->logout();
-        
+
         return redirect()->to("/login/showLogoutMessage");
     }
 
