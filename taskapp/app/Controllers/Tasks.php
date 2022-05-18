@@ -8,8 +8,11 @@ class Tasks extends BaseController
 {
     private $models;
 
+    private $current_user;
+
     public function __construct() {
         $this->model = new \App\Models\TaskModel;
+        $this->current_user = service('auth') -> getCurrentUser();
     }
     public function index()
     {
@@ -18,12 +21,14 @@ class Tasks extends BaseController
         //     ["id" => 2, "description" => "Second Task"]
         // ]; 
         
-        
-        $data = $this->model->findAll();
+        $data = $this->model->paginateTasksByUserID($this->current_user->id);
         
         // dd($data);
         
-        return view("Tasks/index.php", ["tasks" => $data]);
+        return view("Tasks/index.php", [
+            "tasks" => $data,
+            "pager" => $this->model->pager
+        ]);
     }
 
     public function show($id) 
@@ -50,6 +55,9 @@ class Tasks extends BaseController
     {
         
         $task = new Task($this->request->getPost());
+
+
+        $task->user_id = $this->current_user->id;
 
         if($this->model -> insert($task)) {
 
@@ -82,7 +90,11 @@ class Tasks extends BaseController
         
         $task = $this->getTaskOr404($id);
 
-        $task->fill($this->request->getPost());
+        $post = $this->request->getPost();
+        unset($post['user_id']);
+
+
+        $task->fill($post);
         
         if (! $task->hasChanged()) {
 
@@ -91,7 +103,7 @@ class Tasks extends BaseController
                              ->withInput();
 
         }
-        if ($this->$model->save($task)) {
+        if ($this->model->save($task)) {
 
             return redirect()->to("/tasks/show/$id")
                              ->with('info', 'Task Updated Successfully');
@@ -122,7 +134,21 @@ class Tasks extends BaseController
 
     private function getTaskOr404($id)
     {
-        $task = $this->model->find($id);
+        
+        // $task = $this->model->find($id);
+
+        //$task->user_id is the user id as the foreign in task table
+        //$user->id shows the current logged in user
+        //if both of them arent same, means that the tasks may belong to other user.
+
+        // if($task !== null && ($task->user_id !== $user->id)) {
+
+        //     $task = null;
+
+        // }
+        
+        //two ways of doing, second one with model
+        $task = $this->model->getTaskByUserID($id, $this->current_user->id);
 
         if ($task === null) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Task with id $id not found");
