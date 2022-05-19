@@ -1,3 +1,5 @@
+<!-- Success message after registration -->
+
 <?= $this->extend("layouts/default")?>
 
 <!-- section for title -->

@@ -1,3 +1,5 @@
+<!-- Shows Home Index Page -->
+
 <?= $this->extend("layouts/default")?>
 
 <?= $this->section("title")?>

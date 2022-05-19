@@ -1,3 +1,5 @@
+<!-- Login Successful Message -->
+
 <?= $this->extend("layouts/default")?>
 
 <!-- section for title -->
@@ -11,9 +13,9 @@
 <!-- section for content -->
 <?= $this->section("content")?>
 
-    <h1>Sign Up</h1>
+    <h1>Login</h1>
     
-    <p> Sign Up Successfully </p>
+    <p> Login Successfully </p>
 
 <?= $this ->endSection() ?>
 

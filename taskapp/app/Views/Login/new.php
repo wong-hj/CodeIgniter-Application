@@ -1,3 +1,5 @@
+<!-- Login Form -->
+
 <?= $this->extend("layouts/default")?>
 
 <!-- section for title -->
@@ -16,6 +18,7 @@
     <!-- Open Form Here with Form Helper in CodeIgniter -->
     <?= form_open("/login/create") ?>
 
+        
         <div>
             <label for="email">Email</label>
             <input type="text" name="email" id="email" value="<?=old("email")?>">
