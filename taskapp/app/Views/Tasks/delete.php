@@ -1,3 +1,5 @@
+<!-- Delete Task -->
+
 <?= $this->extend("layouts/default")?>
 
 <!-- section for title -->
@@ -18,6 +20,8 @@
 <?= form_open("/tasks/delete/" . $task->id) ?>
 
     <button>Delete</button>
+
+    <!-- anchor for cancel delete action, redirecting back to show tasks page -->
     <a href="<?= site_url('/tasks/show/' . $task->id) ?>">Cancel</a>
 
 </form>
