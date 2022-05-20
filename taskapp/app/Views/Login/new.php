@@ -31,6 +31,9 @@
         
         <button>Login</button>
         <a href="<?= site_url('/') ?>">&laquo; Back to Home Page </a>
+        <br>
+
+        <a href="<?= site_url('/password/forgot') ?>"> Forgot Password? </a>
     </form>
     <!-- Manually closing form -->
 
