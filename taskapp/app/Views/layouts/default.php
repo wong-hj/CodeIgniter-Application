@@ -20,6 +20,11 @@
         <!-- Greet user name -->
         <p>Hello <?= esc(current_user()->name) ?></p>
 
+        <?php if(current_user()->is_admin): ?>
+            <a href="<?= site_url("/admin/users")?>">View User</a> <!-- Direct to view task with anchor -->
+            <br>
+        <?php endif ?>
+
         <a href="<?= site_url("/tasks")?>">View Task</a> <!-- Direct to view task with anchor -->
         <br>
         <a href="<?= site_url("/logout")?>">Log Out</a> <!-- Direct to logout with anchor -->

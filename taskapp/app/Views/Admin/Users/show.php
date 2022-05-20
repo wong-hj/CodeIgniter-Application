@@ -27,6 +27,9 @@
         <dt>Email</dt>
         <dd><?= esc($user->email) ?></dd>
 
+        <dt>Administrator</dt>
+        <dd><?= $user->is_admin ? 'Yes' : 'No' ?></dd>
+
         <dt>Created At</dt>
         <dd><?= esc($user->created_at) ?></dd>
 
@@ -35,7 +38,10 @@
         
     </dl>
     <a href="<?= site_url('/admin/users/edit/' . $user->id)?>"> Edit </a> <!--Direct user to edit with anchor link-->
-    <a href="<?= site_url('/admin/users/delete/' . $user->id)?>"> Delete </a> <!-- Direct user to delete specific user with anchor link -->
+
+    <?php if($user->id != current_user()->id): ?>
+        <a href="<?= site_url('/admin/users/delete/' . $user->id)?>"> Delete </a> <!-- Direct user to delete specific user with anchor link -->
+    <?php endif ?>
 
 <?= $this ->endSection() ?>
 

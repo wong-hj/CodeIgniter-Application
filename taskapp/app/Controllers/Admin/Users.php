@@ -53,7 +53,7 @@ class Users extends \App\Controllers\BaseController
 
         // $task->user_id = $this->current_user->id;
 
-        if($this->model -> insert($user)) {
+        if($this->model -> protect(false)-> insert($user)) {
 
             return redirect()->to("/admin/users/show/{$this->model->insertID}")
                              ->with('info', 'Task Created Successfully');
@@ -86,6 +86,7 @@ class Users extends \App\Controllers\BaseController
 
         $post = $this->request->getPost();
 
+
         if(empty($post['password'])) {
 
             $this->model->disablePasswordValidation();
@@ -104,7 +105,7 @@ class Users extends \App\Controllers\BaseController
                              ->withInput();
 
         }
-        if ($this->model->save($user)) {
+        if ($this->model-> protect(false) ->save($user)) {
 
             return redirect()->to("/admin/users/show/$id")
                              ->with('info', 'User Records Updated Successfully');

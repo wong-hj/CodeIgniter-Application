@@ -10,6 +10,8 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use \App\Filters\LoginFilter;
 use \App\Filters\GuestFilter;
+use \App\Filters\AdminFilter;
+
 
 
 class Filters extends BaseConfig
@@ -28,6 +30,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'login'         => LoginFilter::class,
         'guest'         => GuestFilter::class,
+        'admin'         => AdminFilter::class,
     ];
 
     /**
@@ -71,10 +74,20 @@ class Filters extends BaseConfig
      */
     public $filters = [
         'login' => [
+
             'before' => [
                 'tasks(/*)?',
                 'admin(/*)?'
-                ]
-                    ]
+            ]
+
+        ],
+        
+        'admin' => [
+
+            'before' => [
+                'admin(/*)?'
+            ]
+
+        ]
     ];
 }

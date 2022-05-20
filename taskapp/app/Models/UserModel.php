@@ -47,6 +47,8 @@ class UserModel extends \CodeIgniter\Model
 
             //unset the original written password
             unset($data['data']['password']);
+            unset($data['data']['password_confirmation']);
+
 
         }
         
