@@ -27,6 +27,9 @@
         <dt>Email</dt>
         <dd><?= esc($user->email) ?></dd>
 
+        <dt>Active</dt>
+        <dd><?= $user->is_active ? 'Yes' : 'No' ?></dd>
+
         <dt>Administrator</dt>
         <dd><?= $user->is_admin ? 'Yes' : 'No' ?></dd>
 
