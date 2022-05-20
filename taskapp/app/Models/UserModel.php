@@ -1,8 +1,8 @@
-<!-- Model for user -->
-
 <?php 
 
 namespace App\Models;
+
+// Model for user 
 
 class UserModel extends \CodeIgniter\Model
 {

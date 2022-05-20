@@ -21,7 +21,7 @@
 
     <?php if($tasks): ?>
         <ul>
-            //for loop every $tasks 
+            <!--for loop every $tasks-->
             <?php foreach($tasks as $task): ?>
 
                 <li>
@@ -36,7 +36,8 @@
         <?= $pager->simpleLinks() ?>
         
         <!-- links pagination links (page numbers eg 1 2 3) -->
-        <?= //$pager->links() ?>
+        <!-- $pager->links() -->
+
     <?php else: ?>
         <p>No Tasks Found</p>
     <?php endif ?>

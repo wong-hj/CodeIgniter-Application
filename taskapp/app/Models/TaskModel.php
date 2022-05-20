@@ -1,9 +1,9 @@
-<!-- TaskModel controls the db of task and perform tasks like setting allowed editing fields
-validation rules, validation messages and some other functions that related to the db.-->
-
 <?php 
 
 namespace App\Models;
+
+//TaskModel controls the db of task and perform tasks like setting allowed editing fields
+//validation rules, validation messages and some other functions that related to the db.
 
 class TaskModel extends \CodeIgniter\Model
 {
