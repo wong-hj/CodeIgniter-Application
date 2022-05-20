@@ -50,6 +50,11 @@
             <?= session('error') ?>
         </div>
     <?php endif ?>
+    <?php if (session()->has('delete')): ?>
+        <div class="delete">
+            <?= session('delete') ?>
+        </div>
+    <?php endif ?>
     <?= $this->renderSection("content") ?>
 
 </body>
