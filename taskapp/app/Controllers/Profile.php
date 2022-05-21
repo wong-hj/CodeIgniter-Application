@@ -124,4 +124,22 @@ class Profile extends BaseController
 
         }
     }
+
+    public function image()
+    {
+        if($this->user->profile_image) {
+            $path = WRITEPATH. 'uploads/profile_images/' . $this->user->profile_image;
+
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
+
+            $type = $finfo->file($path);
+
+            header("Content-Type: $type");
+            header("Content-Length: " . filesize($path));
+
+
+            readfile($path);
+            exit;
+        }
+    }
 }
