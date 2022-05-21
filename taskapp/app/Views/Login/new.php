@@ -29,6 +29,12 @@
             <input type="password" name="password">
         </div>
         
+        <div>
+            <label for="remember_me">
+                <input type="checkbox" id="remember_me" name="remember_me" 
+                    <?php if (old("remember_me")): ?>checked<?php endif ?>> Remember Me
+            </label>
+        </div>
         <button>Login</button>
         <a href="<?= site_url('/') ?>">&laquo; Back to Home Page </a>
         <br>

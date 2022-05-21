@@ -80,7 +80,7 @@ class Profileimage extends BaseController
             $model->protect(false)->save($user);
 
             return redirect()->to("/profile/show")
-                             ->with('info', 'Image Successfully deleted.');
+                             ->with('info', 'Image Successfully deleted.'); 
         }
 
         return view('Profileimage/delete');
